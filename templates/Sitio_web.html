@@ -64,7 +64,7 @@
               </tr>
         </thead>
         <tbody>
-            {% for row in consulta.df.head(10).values.tolist()[1:] %}
+            {% for row in consulta.df.head(15).values.tolist()[1:] %}
             <tr>
                 {% for cell in row %}
                     <td>{{ cell }}</td>
@@ -76,7 +76,7 @@
 <!-- Espacio de la Probabilidad -->
 <div class="probabilidad">
     <h2>Probabilidad de la canción</h2>
-    <p>La probabilidad de que salga la canción según los filtros seleccionados es: {{proba}}</p>
+    <p>La probabilidad de que salga la canciones según los filtros seleccionados es: {{proba}}</p>
 </div>
 </body>
 </html>
