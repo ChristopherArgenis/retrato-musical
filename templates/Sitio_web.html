@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Un Retrato Musical</title>
+</head>
+<body>
+<!-- Espacio de los Filtros -->
+<form class="form" method="POST">
+    <h1>Un retrato musical</h1>
+    <label for="artist">Artista:</label>
+    <select name="artist" id="artist">
+        <option value="Select">Nulo</option>
+        {% for artist in consulta.df["Artist"].unique() %}
+            <option value={{artist|tojson}}>{{artist}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="genre">Género:</label>
+    <select name="genre" id="genre">
+        <option value="Select">Nulo</option>
+        {% for genre in consulta.df["Genre"].unique() %}
+            <option value={{genre|tojson}}>{{genre}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="select">Parámetro de año:</label>
+    <select name="select" id="select">
+        <option value="Select">Nulo</option>
+        <option value="Igual" name="Igual">Igual</option>
+        <option value="Apartir" name="Apartir">Apartir</option>
+        <option value="Desde" name="Desde">Desde</option>
+    </select>
+
+    <label for="year1">Año 1:</label>
+    <select name="year1" id="year1">
+        {% for year in years %}
+            <option value={{year}}>{{year}}</option>
+        {% endfor %}
+    </select>
+
+    <label for="year2">Año 2:</label>
+    <select name="year2" id="year2">
+        <option value="1">Nulo</option>
+        {% for year in years %}
+            <option value={{year}}>{{year}}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Enviar</button>
+</form>
+    <br><br>
+    <!-- Espacio del Dataframe -->
+    <table>
+        <thead>
+            <tr>
+                <th>Cancion(es)</th>
+                <th>Artista(s)</th>
+                <th>Año</th>
+                <th>G&eacute;nero</th>
+                <th>Popularidad</th>
+              </tr>
+        </thead>
+        <tbody>
+            {% for row in consulta.df.head(10).values.tolist()[1:] %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<!-- Espacio de la Probabilidad -->
+<div class="probabilidad">
+    <h2>Probabilidad de la canción</h2>
+    <p>La probabilidad de que salga la canción según los filtros seleccionados es: {{proba}}</p>
+</div>
+</body>
+</html>
