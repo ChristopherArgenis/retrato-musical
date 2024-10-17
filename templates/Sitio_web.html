@@ -13,7 +13,7 @@
     <label for="artist">Artista:</label>
     <select name="artist" id="artist">
         <option value="Select">Nulo</option>
-        {% for artist in consulta.df["Artist"].unique() %}
+        {% for artist in consulta.df["Artist"].sort_values().unique() %}
             <option value={{artist|tojson}}>{{artist}}</option>
         {% endfor %}
     </select>
