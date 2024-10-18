@@ -1,0 +1,3 @@
+{% if consulta.artist != "Select"%}
+    <h3>{{consulta.artist}}</h3>
+{% endif %}
